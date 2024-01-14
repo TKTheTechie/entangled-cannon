@@ -2,31 +2,32 @@
 	import { T, useThrelte } from '@threlte/core';
 	import {
 		ContactShadows,
-		Float,
-		Grid,
 		OrbitControls,
 		interactivity,
 		TransformControls,
 		Portal
 	} from '@threlte/extras';
-	import { Pane, FpsGraph, Folder, Slider, Checkbox, Text } from 'svelte-tweakpane-ui';
 	import type {
 		DirectionalLight,
 		DirectionalLightHelper,
 		BoxGeometry,
-		PerspectiveCamera,
-		GridHelper
+		PerspectiveCamera
 	} from 'three';
 	import { Debug } from '@threlte/rapier';
 	import { useKeyboardControls } from 'svelte-kbc';
-	import { CANNON_FORCE, CANNON_POSITION } from '$lib/store/game-config';
-	import Cannon from './player-objects/Cannon.svelte';
+	import { AudioListener } from '@threlte/extras';
+	import { onMount } from 'svelte';
+	import { muted } from '$lib/store/game-config';
+	import Intro from './Intro.svelte';
+	import Game from './Game.svelte';
+
+	let bgMusic: any;
 
 	let box: BoxGeometry;
 
 	let camera: PerspectiveCamera;
 
-	let { scene } = useThrelte();
+	const { scene, renderer } = useThrelte();
 
 	let light: DirectionalLight;
 
@@ -36,57 +37,48 @@
 
 	let debugColliders = false;
 
-	type CannonBallProps = {
-		position: [number, number, number];
-		force: number;
-	};
-
-	let cannonBalls: CannonBallProps[] = [];
-
 	const { w, a, s, d, space } = useKeyboardControls();
 
-	$: {
-		if ($space) {
-			cannonBalls.push({
-				position: [$CANNON_POSITION.x, $CANNON_POSITION.y, $CANNON_POSITION.z],
-				force: 10
-			});
-		}
-	}
-
 	interactivity();
+
+	onMount(() => {
+		bgMusic.volume = 0.3;
+	});
+	muted.subscribe((mute) => {
+		if (mute) bgMusic?.stop?.();
+		else bgMusic?.play?.();
+	});
+
+	// const composer = new EffectComposer(renderer);
+
+	// const setupEffectComposer = (camera: Camera) => {
+	// 	composer.removeAllPasses();
+	// 	composer.addPass(new RenderPass(scene, camera));
+
+	// 	// composer.addPass(new EffectPass(camera, bloomEffect));
+	// 	// composer.addPass(new EffectPass(camera, new FXAAEffect()));
+	// };
+
+	// $: setupEffectComposer(camera);
+
+	// useRender((_, delta) => {
+	// 	composer.render(delta);
+	// });
 </script>
-
-<!-- <Pane title="FPS" position="fixed">
-	<FpsGraph />
-	<Folder title="Light">
-		{#if light}
-			<Slider bind:value={light.position.x} label="Light Position X" />
-			<Slider bind:value={light.position.y} label="Light Position Y" />
-			<Slider bind:value={light.position.z} label="Light Position Z" />
-			<Checkbox bind:value={showLightHelper} label="Light Helper" />
-			
-			
-		{/if}
-	</Folder>
-	<Folder title="Colliders">
-		<Checkbox bind:value={debugColliders} label="Collider Debug" />
-	</Folder>
-
-</Pane> -->
 
 <T.AmbientLight intensity={0.5} />
 
-<T.PerspectiveCamera makeDefault position={[0, 2, -2]} fov={100} bind:ref={camera}>
+<T.PerspectiveCamera makeDefault position={[0, 2.8, -2]} fov={100} bind:ref={camera}>
 	<OrbitControls enableZoom={true} enableDamping target.y={1.5} />
+	<AudioListener />
 </T.PerspectiveCamera>
 
 <T.DirectionalLight
 	scale={4}
 	intensity={0.8}
-	position.x={5}
-	position.y={4}
-	position.z={3.5}
+	position.x={-0.25}
+	position.y={4.89}
+	position.z={-8.52}
 	castShadow
 	bind:ref={light}
 	let:ref
@@ -110,6 +102,7 @@
 	<Debug />
 {/if}
 
+<audio src="/audio/music.mp3" bind:this={bgMusic} />
 <ContactShadows />
-
-<Cannon scale={[0.2, 0.2, 0.2]} />
+<Intro />
+<!-- <Game /> -->

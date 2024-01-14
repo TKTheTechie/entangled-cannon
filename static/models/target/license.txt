@@ -1,0 +1,11 @@
+Model Information:
+* title:	PBR Target
+* source:	https://sketchfab.com/3d-models/pbr-target-ea1bec8a10054369862412c6d451e558
+* author:	zulubo (https://sketchfab.com/zulubo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PBR Target" (https://sketchfab.com/3d-models/pbr-target-ea1bec8a10054369862412c6d451e558) by zulubo (https://sketchfab.com/zulubo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
