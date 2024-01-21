@@ -5,17 +5,20 @@
 	import Floor from './game/Floor.svelte';
 	import Timer from './game/Timer.svelte';
 	import { Text } from '@threlte/extras';
+	import { KeyboardControls, wasdConfig } from 'svelte-kbc';
 </script>
 
-<Cannon />
-<Floor />
-<TargetGenerator />
-<Timer />
+<KeyboardControls config={wasdConfig()}>
+	<Cannon />
+	<Floor />
+	<TargetGenerator />
+	<Timer />
 
-<Text
-	text={`Score: ${$SCORE}`}
-	fontSize={0.5}
-	position={[-1.5, 1, 0]}
-	rotation.y={Math.PI}
-	rotation.x={Math.PI / 4}
-/>
+	<Text
+		text={`Score: ${$SCORE}`}
+		fontSize={0.5}
+		position={[-1.5, 1, 0]}
+		rotation.y={Math.PI}
+		rotation.x={Math.PI / 4}
+	/>
+</KeyboardControls>

@@ -1,5 +1,5 @@
 {
-  "name": "entangled-cannon",
+  "name": "entangled-cannon-leaderboard",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -37,8 +37,15 @@
   },
   "type": "module",
   "dependencies": {
+    "dotenv": "^16.3.1",
+    "solclientjs": "^10.15.0",
     "svelte-kbc": "^0.1.1",
     "svelte-tweakpane-ui": "^1.1.4",
-    "three-stdlib": "^2.29.1"
-  }
+    "three-stdlib": "^2.29.1",
+    "uuid": "^9.0.1"
+  },
+  "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).",
+  "main": "index.mjs",
+  "author": "",
+  "license": "ISC"
 }

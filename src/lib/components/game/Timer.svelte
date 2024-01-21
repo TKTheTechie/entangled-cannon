@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { GAME_TIME_IN_MINUTES } from '$lib/store/game-config';
+	import { GAME_STATES, GAME_STATE, GAME_TIME_IN_MINUTES } from '$lib/store/game-config';
 	import { Text } from '@threlte/extras';
 	import { onDestroy, onMount } from 'svelte';
 
@@ -23,8 +23,8 @@
 
 			// If minutes have run out, clear the interval
 			if (minutes < 0) {
+				GAME_STATE.set(GAME_STATES.END);
 				clearInterval(timer);
-				console.log("Time's up!");
 			} else {
 				// Format the minutes and seconds
 				const formattedMinutes = String(minutes).padStart(2, '0');
