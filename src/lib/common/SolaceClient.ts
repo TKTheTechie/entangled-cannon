@@ -46,6 +46,7 @@ class AsyncSolaceClient {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	constructor() {
 		//Initializing the solace client library
+		//@ts-ignore
 		const factoryProps = new solace.SolclientFactoryProperties();
 		factoryProps.profile = solace.SolclientFactoryProfiles.version10;
 		solace.SolclientFactory.init(factoryProps);
