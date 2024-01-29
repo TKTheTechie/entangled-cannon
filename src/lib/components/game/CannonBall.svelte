@@ -65,7 +65,6 @@
 	);
 
 	onMount(() => {
-		console.log(rotation);
 		start();
 	});
 

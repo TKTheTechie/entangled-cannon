@@ -138,7 +138,6 @@ class AsyncSolaceClient {
 								this.topicSubscriptions.get(sub).isSubscribed &&
 								this.topicSubscriptions.get(sub).callback != null
 							) {
-								console.log('Received message');
 								this.topicSubscriptions.get(sub).callback(message);
 							}
 						}

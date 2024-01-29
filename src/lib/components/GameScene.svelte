@@ -113,7 +113,7 @@
 <T.AmbientLight intensity={0.5} />
 
 <T.PerspectiveCamera makeDefault position={[0, 2.8, -2]} fov={100} bind:ref={camera}>
-	<OrbitControls enableZoom={true} enableDamping target.y={1.5} />
+	<!-- <OrbitControls enableZoom={true} enableDamping target.y={1.5} /> -->
 	<AudioListener />
 </T.PerspectiveCamera>
 
