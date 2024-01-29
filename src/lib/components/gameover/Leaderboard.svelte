@@ -52,12 +52,14 @@
 			{#if entries.length > 0}
 				<div class="table-container">
 					<div class="table-row table-header">
+						<div class="table-data" />
 						<div class="table-data">Initials</div>
 						<div class="table-data">Score</div>
 						<div class="table-data">Date</div>
 					</div>
-					{#each entries as { initials, score, datetime }}
+					{#each entries as { initials, score, datetime }, i}
 						<div class="table-row">
+							<div class="table-data">{i + 1}</div>
 							<div class="table-data">{initials ? initials : '-'}</div>
 							<div class="table-data">{score ? score : '-'}</div>
 							<div class="table-data">

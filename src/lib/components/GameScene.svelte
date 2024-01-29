@@ -101,6 +101,13 @@
 			<a href="https://solace.com/products/event-broker/cloud/" target="_blank">Solace Cloud</a>
 		</div></Element
 	>
+	<Element
+		><div class="solace-status">
+			<a href="https://tkthetechie.io/blog/event-driven-3d-javscript" target="_blank"
+				>Learn how this was built!</a
+			>
+		</div></Element
+	>
 </Pane>
 
 <T.AmbientLight intensity={0.5} />
@@ -156,6 +163,7 @@
 		font-weight: 500;
 		line-height: 1;
 		text-align: left;
+		padding: 5px;
 	}
 
 	.solace-Connecting {
