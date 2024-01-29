@@ -37,6 +37,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@sveltejs/adapter-static": "^3.0.1",
     "@threlte/flex": "^1.0.0",
     "dotenv": "^16.3.1",
     "solclientjs": "^10.15.0",
