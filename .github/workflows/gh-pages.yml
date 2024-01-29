@@ -29,6 +29,11 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
+          VITE_SOLACE_URL: ${{ vars.VITE_SOLACE_URL }}
+          VITE_SOLACE_VPN: ${{ vars.VITE_SOLACE_VPN }}
+          VITE_SOLACE_USER: ${{ vars.VITE_SOLACE_USER }}
+          VITE_SOLACE_PASSWORD: ${{ vars.VITE_SOLACE_PASSWORD}}
+          VITE_LEADERBOARD_URL: ${{ vars.VITE_LEADERBOARD_URL }}
         run: |
           npm run build
 
