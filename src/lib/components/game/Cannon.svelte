@@ -18,7 +18,7 @@
 
 	let cannonballMaterial: MeshMatcapMaterial;
 
-	const cannonballTexture = useTexture('/textures/cannon_ball_matcap.png');
+	const cannonballTexture = useTexture('./textures/cannon_ball_matcap.png');
 
 	let fireSound: any, turnSound: any;
 

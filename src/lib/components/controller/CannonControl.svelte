@@ -125,7 +125,7 @@
 		<HTML position={[-1, -0.75, 0]}>
 			<img
 				alt="swipe icon"
-				src="/swipe.png"
+				src="./swipe.png"
 				height="125px"
 				width="125px"
 				on:touchstart={() => {
