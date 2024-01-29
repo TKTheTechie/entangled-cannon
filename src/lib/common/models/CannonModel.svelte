@@ -12,11 +12,9 @@ Title: Cannon
 	import { T, forwardEventHandlers } from '@threlte/core';
 	import { useGltf, useSuspense } from '@threlte/extras';
 
-	import { useKeyboardControls } from 'svelte-kbc';
-
 	const load = () => {
 		const suspend = useSuspense();
-		return suspend(useGltf('models/cannon/scene.gltf'));
+		return suspend(useGltf('./models/cannon/scene.gltf'));
 	};
 
 	export const preload = async () => {
