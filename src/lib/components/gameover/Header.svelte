@@ -3,7 +3,7 @@
 	import { Float, useTexture } from '@threlte/extras';
 	import { MeshMatcapMaterial } from 'three';
 	import { FontLoader } from 'three-stdlib';
-	import Text3D from '../game/common/Text3D.svelte';
+	import Text3D from '$lib/common/Text3D.svelte';
 
 	const matcapLoader = useTexture('/textures/cannon_ball_matcap.png');
 	const fontLoader = useLoader(FontLoader).load('/fonts/Cyberway_Riders_Regular.json');

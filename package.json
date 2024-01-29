@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -37,6 +37,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@threlte/flex": "^1.0.0",
     "dotenv": "^16.3.1",
     "solclientjs": "^10.15.0",
     "svelte-kbc": "^0.1.1",

@@ -3,11 +3,16 @@
 	import { useTexture } from '@threlte/extras';
 	import { MeshMatcapMaterial, type Euler, type Group } from 'three';
 	import { useKeyboardControls } from 'svelte-kbc';
-	import { muted } from '$lib/store/game-config';
-	import { Checkbox, Pane, Text } from 'svelte-tweakpane-ui';
+	import { GAME_SESSION_ID, muted } from '$lib/store/game-config';
 	import { Collider, RigidBody } from '@threlte/rapier';
-	import CannonModel from './models/CannonModel.svelte';
+	import CannonModel from '../../common/models/CannonModel.svelte';
 	import CannonBall from './CannonBall.svelte';
+	import SolaceClient, {
+		type CannonFireMessage,
+		type CannonRotationMessage
+	} from '$lib/common/SolaceClient';
+	import type solace from 'solclientjs';
+	import { onMount } from 'svelte';
 
 	extend({ MeshMatcapMaterial });
 
@@ -26,32 +31,49 @@
 
 	let cannonBalls: CannonBallProps[] = [];
 
-	let power = '45';
+	const BASE_POWER = 50;
 
 	let cannon: Group;
 
-	const { w, a, s, d, space } = useKeyboardControls();
+	let cannonRotationEvents: Array<Euler> = [];
+
+	const rotateCannon = () => {
+		if (cannonRotationEvents.length > 0) {
+			cannon.setRotationFromEuler(cannonRotationEvents.shift());
+			if (!$muted) turnSound?.play();
+		}
+	};
 
 	useTask((delta) => {
-		if ($a) {
-			if (!$muted) turnSound?.play();
-			cannon.rotateY((-1 * Math.PI) / 180);
-			console.log(cannon.rotation);
-		}
-		if ($d) {
-			if (!$muted) turnSound?.play();
-			cannon.rotateY(Math.PI / 180);
-			console.log(cannon.rotation);
-		}
+		rotateCannon();
+		rotateCannon();
 	});
 
-	const fireCannon = () => {
-		if (!$muted) fireSound?.play();
+	onMount(() => {
+		SolaceClient.subscribeCannonRotationMessage($GAME_SESSION_ID, (msg: solace.Message) => {
+			const blob = new Blob([msg.getBinaryAttachment()], { type: 'text/plain; charset=utf-8' });
+			blob.text().then((text) => {
+				let rotationEvent: CannonRotationMessage = JSON.parse(text);
+				cannonRotationEvents.push(rotationEvent.rotation);
+			});
+		});
 
+		SolaceClient.subscribeCannonFireMessage($GAME_SESSION_ID, (msg: solace.Message) => {
+			const blob = new Blob([msg.getBinaryAttachment()], { type: 'text/plain; charset=utf-8' });
+			blob.text().then((text) => {
+				let fireEvent: CannonFireMessage = JSON.parse(text);
+				fireCannon(fireEvent.power);
+			});
+		});
+	});
+
+	const fireCannon = (power: number) => {
+		if (!$muted) fireSound?.play();
+		const adjusted_power = power + BASE_POWER;
 		cannonBalls = [
 			...cannonBalls,
 			{
-				power: +power,
+				power: adjusted_power,
 				rotation: cannon.rotation
 			}
 		];
@@ -68,7 +90,7 @@
 
 {#await cannonballTexture then texture}
 	<T.Group name="Cannon" bind:ref={cannon} visible={cannonVisible}>
-		<CannonModel on:click={fireCannon} scale={[0.2, 0.2, 0.2]} />
+		<CannonModel scale={[0.2, 0.2, 0.2]} />
 		<RigidBody type={'fixed'} userData={{ id: 'Launcher' }}>
 			<Collider shape={'cuboid'} args={[0.5, 0.2, 0.5]} />
 		</RigidBody>

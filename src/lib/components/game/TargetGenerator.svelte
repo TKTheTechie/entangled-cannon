@@ -75,7 +75,7 @@
 	}
 
 	onMount(() => {
-		targetCoordinates = generateRandomProjectileCoordinates(50);
+		targetCoordinates = generateRandomProjectileCoordinates(100);
 	});
 </script>
 

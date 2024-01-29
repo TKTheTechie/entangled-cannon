@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { SCORE } from '$lib/store/game-config';
+	import SolaceClient from '$lib/common/SolaceClient';
+	import { GAME_SESSION_ID, SCORE } from '$lib/store/game-config';
 
 	export let dialog;
 
@@ -7,11 +8,7 @@
 
 	const submitHighScore = () => {
 		if (initials.length != 0) {
-			const score = {
-				initials,
-				score: $SCORE
-			};
-			console.log(score);
+			SolaceClient.publishHighScoreMessage(initials, $GAME_SESSION_ID, $SCORE);
 			dialog.close();
 		}
 	};
@@ -40,7 +37,7 @@
 		padding: 16px;
 		color: white;
 		background-color: #333;
-		font-size: 12px;
+		font-size: 15px;
 		align-content: center;
 		display: flex; /* Add this line */
 		flex-direction: column; /* Add this line */
@@ -54,7 +51,7 @@
 		margin-bottom: 2px;
 		align-content: center;
 		font-weight: bold;
-		font-size: 16px;
+		font-size: 35px;
 	}
 
 	.content {
@@ -69,6 +66,7 @@
 	input[type='text'] {
 		border: 1px solid #ccc;
 		border-radius: 4px;
+		font-family: VT323;
 	}
 
 	.button-container {
@@ -84,7 +82,9 @@
 		border-radius: 4px;
 		cursor: pointer;
 		align-content: center;
-		font-size: 10px;
+		font-size: 20px;
+		font-family: VT323;
+
 		transition: background-color 0.3s ease;
 	}
 

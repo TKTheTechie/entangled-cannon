@@ -59,7 +59,7 @@ Title: PBR Target
 		const intervalId = setInterval(() => {
 			blink = !blink;
 			callCount++;
-			if (callCount == 5) {
+			if (callCount == 10) {
 				clearInterval(intervalId);
 				hit = true;
 			}

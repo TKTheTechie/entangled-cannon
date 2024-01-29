@@ -47,7 +47,7 @@
 		<ScoreSubmissionForm bind:dialog on:close={loadLeaderboard} />
 	{:else}
 		{#await fetchLeaderboard()}
-			<p>Loading Leaderboard...</p>
+			<div class="loading-leaderboard">Loading Leaderboard...</div>
 		{:then}
 			{#if entries.length > 0}
 				<div class="table-container">
@@ -91,7 +91,7 @@
 		overflow: hidden;
 		border-radius: 10px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		font-size: 10pt;
+		font-size: 15pt;
 	}
 
 	/* Style for the table row divs */
@@ -126,5 +126,12 @@
 
 	.table-row:nth-child(even) {
 		background-color: #eaeaea;
+	}
+
+	.loading-leaderboard {
+		width: 300px;
+		border: 1px solid black;
+		background-color: white;
+		font-size: 2em;
 	}
 </style>

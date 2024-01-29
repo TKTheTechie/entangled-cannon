@@ -4,7 +4,7 @@
 	import QRCode from './QRCode.svelte';
 	import { text } from '@sveltejs/kit';
 	import { MeshPhongMaterial } from 'three';
-	import { muted } from '$lib/store/game-config';
+	import { GAME_STATE, GAME_STATES, muted } from '$lib/store/game-config';
 
 	const { hovering, onPointerEnter, onPointerLeave } = useCursor();
 
@@ -16,18 +16,20 @@
 	<Text
 		text="Instructions"
 		fontSize={0.5}
-		position={[1.75, 2, 0]}
+		position={[1.75, 2.3, 0]}
 		rotation.y={Math.PI}
 		rotation.x={Math.PI / 4}
+		font={'fonts/VT323-Regular.ttf'}
 	/>
 
 	<Text
 		text="     1. Scan the QR Code with your phone to connect your phone to begin the game session 
-     2. Turn your phone to portrait mode and hold it in front of you 
-     3. Tilt your phone to the left and right to control the direction of the cannon 
-     4. Fire as many targets as you can to score points within the time limit"
+     2. Move the cannon left and right by swiping
+     3. Hold down the FIRE button to shoot a cannnon ball
+     4. Hit as many targets as you can to score points within the time limit"
 		fontSize={0.2}
-		position={[4, 1, 0]}
+		font={'fonts/VT323-Regular.ttf'}
+		position={[3.9, 1.8, 0]}
 		rotation.y={Math.PI}
 		rotation.x={Math.PI / 4}
 	/>
@@ -40,6 +42,8 @@
 			position={[0.5, 1, 0]}
 			on:click={(e) => {
 				showInstructions = true;
+				GAME_STATE.set(GAME_STATES.INSTRUCTIONS);
+				muted.set(false);
 			}}
 			on:pointerenter={(e) => {
 				buttonColor = 'green';
@@ -55,9 +59,10 @@
 			<T.MeshPhongMaterial color={buttonColor} />
 		</T.Mesh>
 		<Text
-			text="START"
-			fontSize={0.5}
-			position={[1, 1.6, -0.1]}
+			text="CLICK TO START"
+			fontSize={0.6}
+			font={'fonts/VT323-Regular.ttf'}
+			position={[2.1, 1.7, -0.2]}
 			rotation.y={Math.PI}
 			rotation.x={Math.PI / 3.5}
 			castShadow

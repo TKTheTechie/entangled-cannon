@@ -17,6 +17,7 @@
 	import { AudioListener } from '@threlte/extras';
 	import { onDestroy, onMount } from 'svelte';
 	import {
+		GAME_SESSION_ID,
 		GAME_STATE,
 		GAME_STATES,
 		SOLACE_STATUS,
@@ -27,7 +28,7 @@
 	import Game from './Game.svelte';
 	import GameOver from './GameOver.svelte';
 	import { Pane, Checkbox, Element } from 'svelte-tweakpane-ui';
-	import solaceClient from '../../utils/SolaceClient';
+	import SolaceClient from '$lib/common/SolaceClient';
 
 	let bgMusic: any;
 
@@ -52,10 +53,12 @@
 	onMount(() => {
 		bgMusic.volume = 0.3;
 		//Instantiate the connection to Solace
-		solaceClient
-			.connect()
+		SolaceClient.connect()
 			.then(() => {
 				console.log('Connecting to Solace...');
+				SolaceClient.subscribeGameJoinRequest($GAME_SESSION_ID, () => {
+					GAME_STATE.set(GAME_STATES.PLAYING);
+				});
 			})
 			.catch((err) => {
 				console.log('Error connecting to Solace: ' + err.toString());
@@ -88,7 +91,9 @@
 </script>
 
 <Pane position="fixed" title="Game Config">
-	<Checkbox bind:value={$muted} label="Mute Audio" />
+	{#if $GAME_STATE !== GAME_STATES.INTRO}
+		<Checkbox bind:value={$muted} label="Mute Audio" />
+	{/if}
 	<Element
 		><div class="solace-status solace-{solace_status}">
 			{solace_status}
@@ -136,7 +141,7 @@
 
 <audio src="/audio/music.mp3" bind:this={bgMusic} loop />
 <ContactShadows />
-{#if $GAME_STATE === GAME_STATES.START}
+{#if $GAME_STATE === GAME_STATES.INTRO || $GAME_STATE === GAME_STATES.INSTRUCTIONS}
 	<Intro />
 {:else if $GAME_STATE === GAME_STATES.PLAYING}
 	<Game />

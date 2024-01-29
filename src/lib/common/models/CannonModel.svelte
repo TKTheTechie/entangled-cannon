@@ -30,6 +30,12 @@ Title: Cannon
 	const gltf = load();
 
 	const component = forwardEventHandlers();
+
+	export let startDragFn = (e) => {};
+	export let dragFn = (e) => {};
+	export let stopDragFn = (e) => {};
+
+	export let draggable = false;
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -37,13 +43,27 @@ Title: Cannon
 		<slot name="fallback" />
 	{:then gltf}
 		<T.Group rotation={[-Math.PI / 2, 0, 0]}>
-			<T.Mesh
-				name="Cannon_Model"
-				castShadow
-				receiveShadow
-				geometry={gltf.nodes.Object_2.geometry}
-				material={gltf.materials.initialShadingGroup}
-			/>
+			{#if draggable}
+				<T.Mesh
+					name="Cannon_Model"
+					castShadow
+					receiveShadow
+					geometry={gltf.nodes.Object_2.geometry}
+					material={gltf.materials.initialShadingGroup}
+					on:pointerdown={(e) => startDragFn(e)}
+					on:pointermove={(e) => dragFn(e)}
+					on:pointerup={(e) => stopDragFn(e)}
+					on:pointerleave={(e) => stopDragFn(e)}
+				/>
+			{:else}
+				<T.Mesh
+					name="Cannon_Model"
+					castShadow
+					receiveShadow
+					geometry={gltf.nodes.Object_2.geometry}
+					material={gltf.materials.initialShadingGroup}
+				/>
+			{/if}
 		</T.Group>
 	{:catch error}
 		<slot name="error" {error} />

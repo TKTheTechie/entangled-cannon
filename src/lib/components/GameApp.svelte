@@ -1,10 +1,17 @@
 <script lang="ts">
 	import { Canvas, extend, T } from '@threlte/core';
-	import Scene from './Scene.svelte';
+	import Scene from './GameScene.svelte';
 	import { World } from '@threlte/rapier';
 	import { GridHelper } from 'three';
 	import { Sky } from '@threlte/extras';
+	import { v4 as uuidv4 } from 'uuid';
+	import { onMount } from 'svelte';
+	import { GAME_SESSION_ID } from '$lib/store/game-config';
 	extend({ GridHelper });
+
+	onMount(() => {
+		GAME_SESSION_ID.set(uuidv4());
+	});
 </script>
 
 <!-- <KeyboardControls config={wasdConfig()}> -->
@@ -34,4 +41,5 @@
 
 	<World><Scene /></World>
 </Canvas>
+
 <!-- </KeyboardControls> -->

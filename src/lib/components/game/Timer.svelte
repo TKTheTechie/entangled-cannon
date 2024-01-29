@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { GAME_STATES, GAME_STATE, GAME_TIME_IN_MINUTES } from '$lib/store/game-config';
+	import SolaceClient from '$lib/common/SolaceClient';
+	import {
+		GAME_STATES,
+		GAME_STATE,
+		GAME_TIME_IN_MINUTES,
+		GAME_SESSION_ID
+	} from '$lib/store/game-config';
 	import { Text } from '@threlte/extras';
 	import { onDestroy, onMount } from 'svelte';
 
@@ -24,6 +30,7 @@
 			// If minutes have run out, clear the interval
 			if (minutes < 0) {
 				GAME_STATE.set(GAME_STATES.END);
+				SolaceClient.publishGameOver($GAME_SESSION_ID);
 				clearInterval(timer);
 			} else {
 				// Format the minutes and seconds
@@ -45,4 +52,5 @@
 	position={[4, 1, 0]}
 	rotation.y={Math.PI}
 	rotation.x={Math.PI / 4}
+	font={'fonts/VT323-Regular.ttf'}
 />
