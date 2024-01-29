@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { T, useThrelte } from '@threlte/core';
+	import { T, useTask, useThrelte } from '@threlte/core';
 	import {
 		ContactShadows,
 		OrbitControls,
@@ -112,8 +112,14 @@
 
 <T.AmbientLight intensity={0.5} />
 
-<T.PerspectiveCamera makeDefault position={[0, 2.8, -2]} fov={100} bind:ref={camera}>
-	<!-- <OrbitControls enableZoom={true} enableDamping target.y={1.5} /> -->
+<T.PerspectiveCamera
+	makeDefault
+	position={[0, 2.8, -2]}
+	fov={100}
+	bind:ref={camera}
+	rotation={[-2.5, 1.01678e-16, 3.141]}
+>
+	<!-- <OrbitControls enableZoom={false} enableRotate={false} enableDamping target.y={1.5} /> -->
 	<AudioListener />
 </T.PerspectiveCamera>
 
