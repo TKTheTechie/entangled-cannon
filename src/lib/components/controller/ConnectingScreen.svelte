@@ -17,7 +17,7 @@
 	fontSize={0.75}
 	position={[-1.6, 1.5, 0]}
 	color={'red'}
-	font={'fonts/VT323-Regular.ttf'}
+	font={'./fonts/VT323-Regular.ttf'}
 />
 <T.Group bind:ref={loadingCannon}>
 	<CannonModel scale={0.1} position={[0, -2, 0]} />

@@ -77,14 +77,14 @@
 		volume: 1,
 		stop: undefined as (() => any) | undefined,
 		play: undefined as ((...args: any[]) => any) | undefined,
-		source: 'audio/ball-bounce.mp3'
+		source: './audio/ball-bounce.mp3'
 	};
 
 	const explosion_audio = {
 		volume: 1,
 		stop: undefined as (() => any) | undefined,
 		play: undefined as ((...args: any[]) => any) | undefined,
-		source: 'audio/ball-explode.mp3'
+		source: './audio/ball-explode.mp3'
 	};
 
 	const contact = (e: ContactEvent) => {

@@ -28,6 +28,6 @@
 		text={'+' + points}
 		position={[-0.5, 2, -1]}
 		rotation={[0.25, -Math.PI, 0]}
-		font={'fonts/VT323-Regular.ttf'}
+		font={'./fonts/VT323-Regular.ttf'}
 	/>
 </T.Group>

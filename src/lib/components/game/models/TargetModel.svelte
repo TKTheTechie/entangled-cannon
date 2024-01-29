@@ -15,7 +15,7 @@ Title: PBR Target
 
 	const load = () => {
 		const suspend = useSuspense();
-		return suspend(useGltf('models/target/scene.gltf'));
+		return suspend(useGltf('./models/target/scene.gltf'));
 	};
 
 	export const preload = async () => {
@@ -51,7 +51,7 @@ Title: PBR Target
 		volume: 1,
 		stop: undefined as (() => any) | undefined,
 		play: undefined as ((...args: any[]) => any) | undefined,
-		source: 'audio/target-hit.mp3'
+		source: './audio/target-hit.mp3'
 	};
 
 	const blinkTarget = () => {

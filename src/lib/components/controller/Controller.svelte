@@ -3,13 +3,7 @@
 	import { Sky, Text, useInteractivity } from '@threlte/extras';
 	import { onMount } from 'svelte';
 	import ConnectingScreen from './ConnectingScreen.svelte';
-	import {
-		CONTROLLER_STATE,
-		CONTROLLER_STATES,
-		GAME_SESSION_ID,
-		SOLACE_STATUS,
-		SOLACE_STATUS_CODES
-	} from '$lib/store/game-config';
+	import { CONTROLLER_STATE, CONTROLLER_STATES, GAME_SESSION_ID } from '$lib/store/game-config';
 	import CannonControl from './CannonControl.svelte';
 	import SolaceClient from '$lib/common/SolaceClient';
 
@@ -61,7 +55,7 @@
 			fontSize={0.75}
 			position={[-1.6, 1.5, 0]}
 			color={'red'}
-			font={'fonts/VT323-Regular.ttf'}
+			font={'./fonts/VT323-Regular.ttf'}
 		/>
 	{:else if $CONTROLLER_STATE === CONTROLLER_STATES.CONNECTING}
 		<ConnectingScreen />
@@ -73,7 +67,7 @@
 			fontSize={1.75}
 			position={[-1.6, 2.5, 0]}
 			color={'red'}
-			font={'fonts/VT323-Regular.ttf'}
+			font={'./fonts/VT323-Regular.ttf'}
 		/>
 	{/if}
 </Canvas>

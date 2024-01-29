@@ -146,7 +146,7 @@
 	<Debug />
 {/if}
 
-<audio src="/audio/music.mp3" bind:this={bgMusic} loop />
+<audio src="./audio/music.mp3" bind:this={bgMusic} loop />
 <ContactShadows />
 {#if $GAME_STATE === GAME_STATES.INTRO || $GAME_STATE === GAME_STATES.INSTRUCTIONS}
 	<Intro />

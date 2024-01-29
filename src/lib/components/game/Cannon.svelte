@@ -85,8 +85,8 @@
 	<Checkbox label="Mute" bind:value={$muted} />
 </Pane> -->
 
-<audio src="/audio/cannon-fire.mp3" bind:this={fireSound} />
-<audio src="/audio/cannon-turn.mp3" bind:this={turnSound} />
+<audio src="./audio/cannon-fire.mp3" bind:this={fireSound} />
+<audio src="./audio/cannon-turn.mp3" bind:this={turnSound} />
 
 {#await cannonballTexture then texture}
 	<T.Group name="Cannon" bind:ref={cannon} visible={cannonVisible}>

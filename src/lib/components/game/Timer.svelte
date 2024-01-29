@@ -52,5 +52,5 @@
 	position={[4, 1, 0]}
 	rotation.y={Math.PI}
 	rotation.x={Math.PI / 4}
-	font={'fonts/VT323-Regular.ttf'}
+	font={'./fonts/VT323-Regular.ttf'}
 />

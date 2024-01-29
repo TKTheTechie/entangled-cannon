@@ -103,8 +103,8 @@
 	};
 </script>
 
-<audio src="/audio/cannon-charge.mp3" bind:this={cannonChargeAudio} />
-<audio src="/audio/cannon-reload.mp3" bind:this={cannonReloadAudio} />
+<audio src="./audio/cannon-charge.mp3" bind:this={cannonChargeAudio} />
+<audio src="./audio/cannon-reload.mp3" bind:this={cannonReloadAudio} />
 <HTML position={[-1.75, 5, 0]}>
 	<div class="power">
 		{#key cannonPower}
@@ -117,7 +117,7 @@
 	fontSize={0.2}
 	text={'POWER'}
 	position={[-1.25, 2.9, 1]}
-	font={'fonts/bangers.regular.ttf'}
+	font={'./fonts/bangers.regular.ttf'}
 />
 
 {#if showTouchIcon}
