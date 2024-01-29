@@ -21,6 +21,6 @@
 
 	@font-face {
 		font-family: VT323;
-		src: url('./fonts/VT323-Regular.ttf');
+		src: url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 	}
 </style>
