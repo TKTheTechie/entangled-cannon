@@ -27,7 +27,6 @@
 					entries[index] = entry;
 				});
 
-				console.log(entries);
 				resolve(undefined);
 			}, 2500);
 		});
