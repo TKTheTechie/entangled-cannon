@@ -15,8 +15,21 @@ const config = {
 			pages: 'build',
             assets: 'build',
             precompress: false,
+			fallback: "404.html",
 			strict: true,
-		})
+			paths: {
+				base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+			}
+		}),
+		handleHttpError: ({ path, referrer, message }) => {
+			// ignore deliberate link to shiny 404 page
+			if (path === '/404.html') {
+				return;
+			}
+
+			// otherwise fail the build
+			throw new Error(message);
+		}
 	}
 };
 
