@@ -4,7 +4,7 @@ An experimental app that explores using event driven architecture to build inter
 
    * [Svelte](https://svelte.dev): A javascript framework that uses a compilation step to create compact web applications that run blazingly fast.
    * [Threlte](https://threlte.xyz): A library for svelte heavily inspired by [react-three-fiber](https://github.com/pmndrs/react-three-fiber) that allows you to easily build interactive 3D applications using [Three.js](https://threejs.org)
-    * [Solace PubSub+ Cloud](https://solace.cloud): Enterprise grade messaging that facilitates communication between the phone and the web application
+   * [Solace PubSub+ Cloud](https://solace.cloud): Enterprise grade messaging that facilitates communication between the phone and the web application
 
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
