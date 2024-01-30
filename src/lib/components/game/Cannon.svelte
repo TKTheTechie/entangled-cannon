@@ -2,7 +2,6 @@
 	import { T, extend, useTask } from '@threlte/core';
 	import { useTexture } from '@threlte/extras';
 	import { MeshMatcapMaterial, type Euler, type Group } from 'three';
-	import { useKeyboardControls } from 'svelte-kbc';
 	import { GAME_SESSION_ID, muted } from '$lib/store/game-config';
 	import { Collider, RigidBody } from '@threlte/rapier';
 	import CannonModel from '../../common/models/CannonModel.svelte';

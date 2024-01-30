@@ -103,7 +103,7 @@
 	>
 	<Element
 		><div class="solace-status">
-			<a href="https://tkthetechie.io/blog/event-driven-3d-javscript" target="_blank"
+			<a href="https://tkthetechie.io/blog/event-driven-3d-javascript" target="_blank"
 				>Learn how this was built!</a
 			>
 		</div></Element
