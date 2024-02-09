@@ -6,6 +6,21 @@
 	import SolaceClient from '$lib/common/SolaceClient';
 	import { GAME_SESSION_ID } from '$lib/store/game-config';
 
+	const getMobileOS = () => {
+		const ua = navigator.userAgent;
+		if (/android/i.test(ua)) {
+			return 'Android';
+		} else if (
+			/iPad|iPhone|iPod/.test(ua) ||
+			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+		) {
+			return 'iOS';
+		}
+		return 'Other';
+	};
+
+	const isiOS = getMobileOS() === 'iOS';
+
 	interactivity();
 
 	let touchIcon: Group,
@@ -55,7 +70,9 @@
 
 	const dragFn = ({ pointer }) => {
 		if (enableDrag) {
-			dragDiff = pointer.x - currentPointerX;
+			dragDiff = (pointer.x - currentPointerX) * 0.1;
+
+			if (isiOS) dragDiff = dragDiff * 0.1;
 		}
 	};
 
@@ -69,8 +86,9 @@
 				(cannon.rotation.y > 0.9 && dragDiff < 0) ||
 				Math.abs(cannon.rotation.y) < 0.9
 			) {
+				cannon.rotateY(dragDiff);
+
 				SolaceClient.publishCannonRotationMessage($GAME_SESSION_ID, cannon.rotation);
-				cannon.rotateY(dragDiff / 100);
 			}
 		}
 		if (fireState == FIRE_STATE.POWERING) {
