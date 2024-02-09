@@ -70,9 +70,9 @@
 
 	const dragFn = ({ pointer }) => {
 		if (enableDrag) {
-			dragDiff = (pointer.x - currentPointerX) * 0.1;
+			dragDiff = pointer.x - currentPointerX;
 
-			if (isiOS) dragDiff = dragDiff * 0.1;
+			if (isiOS) dragDiff = dragDiff * 0.01;
 		}
 	};
 
