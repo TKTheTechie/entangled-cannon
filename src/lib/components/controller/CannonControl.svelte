@@ -73,6 +73,7 @@
 			dragDiff = pointer.x - currentPointerX;
 
 			if (isiOS) dragDiff = dragDiff * 0.01;
+			else dragDiff = dragDiff * 0.1;
 		}
 	};
 
