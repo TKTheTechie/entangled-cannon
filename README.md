@@ -64,7 +64,6 @@ You can preview the production build with `npm run preview`.
 If you would like to learn more about how exactly this was built - feel free to visit a [blog post](https://tkthetechie.io/blog/event-driven-3d-javscript) I wrote up. 
 
 ## Credits
-
    * Cannon model based on [this model](https://sketchfab.com/3d-models/cannon-4ca9b1f52fcc4d399ee65ed7778cfe30) by [luonro11](https://sketchfab.com/luonro11) licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
    * Target model based on [PBR Target](https://sketchfab.com/3d-models/pbr-target-ea1bec8a10054369862412c6d451e558) by [zulubo](https://sketchfab.com/zulubo) licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
    * Music and sound effects downloaded from [Pixabay](https://pixabay.com/)
