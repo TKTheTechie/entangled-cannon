@@ -5,21 +5,25 @@
 	import { Clock, type Group } from 'three';
 	import SolaceClient from '$lib/common/SolaceClient';
 	import { GAME_SESSION_ID } from '$lib/store/game-config';
+	import { onMount } from 'svelte';
 
-	const getMobileOS = () => {
+	let sensitivityMultiplier = 0;
+
+	const adjustSensitivtyMultiplier = () => {
 		const ua = navigator.userAgent;
 		if (/android/i.test(ua)) {
-			return 'Android';
+			sensitivityMultiplier = 0.1;
 		} else if (
 			/iPad|iPhone|iPod/.test(ua) ||
 			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 		) {
-			return 'iOS';
+			sensitivityMultiplier = 0.01;
+		}else {
+			sensitivityMultiplier = 0.01;
 		}
-		return 'Other';
 	};
 
-	const isiOS = getMobileOS() === 'iOS';
+
 
 	interactivity();
 
@@ -56,6 +60,7 @@
 	let cannonChargeAudio: any;
 	let cannonReloadAudio: any;
 
+
 	let buttonBgColor = 'hsl(345deg 100% 47%)';
 
 	const startDragFn = ({ pointer }) => {
@@ -70,10 +75,7 @@
 
 	const dragFn = ({ pointer }) => {
 		if (enableDrag) {
-			dragDiff = pointer.x - currentPointerX;
-
-			if (isiOS) dragDiff = dragDiff * 0.01;
-			else dragDiff = dragDiff * 0.1;
+			dragDiff = (pointer.x - currentPointerX) * sensitivityMultiplier;
 		}
 	};
 
@@ -120,6 +122,10 @@
 			cannonReloadAudio?.play?.();
 		}, 1000);
 	};
+
+	onMount(() => {
+		adjustSensitivtyMultiplier();
+	});
 </script>
 
 <audio src="./audio/cannon-charge.mp3" bind:this={cannonChargeAudio} />
@@ -173,6 +179,7 @@
 			{FIRE_STATE_TEXT[fireState]}</span
 		>
 	</button>
+	<input type="text" bind:value={sensitivityMultiplier} />
 </HTML>
 
 <style>
