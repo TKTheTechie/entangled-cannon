@@ -11,14 +11,10 @@
 
 	const adjustSensitivtyMultiplier = () => {
 		const ua = navigator.userAgent;
-		if (/android/i.test(ua)) {
-			sensitivityMultiplier = 0.1;
-		} else if (
-			/iPad|iPhone|iPod/.test(ua) ||
-			(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-		) {
-			sensitivityMultiplier = 0.01;
-		}else {
+		if (/android/i.test(ua) && /Chrome/i.test(ua)){
+			sensitivityMultiplier =1;
+		}
+		 else {
 			sensitivityMultiplier = 0.01;
 		}
 	};
@@ -130,6 +126,8 @@
 
 <audio src="./audio/cannon-charge.mp3" bind:this={cannonChargeAudio} />
 <audio src="./audio/cannon-reload.mp3" bind:this={cannonReloadAudio} />
+
+
 <HTML position={[-1.75, 5, 0]}>
 	<div class="power">
 		{#key cannonPower}
@@ -171,6 +169,10 @@
 		draggable={true}
 	/>
 </T.Group>
+<HTML position={[-1.6, -1.3, 0]}>
+	
+	<input type="text" bind:value={sensitivityMultiplier} size="5"/>
+</HTML>
 <HTML position={[-1.6, -1.75, 0]}>
 	<button class="pushable" on:touchstart={powerCannon} on:touchend={fireCannon}>
 		<span class="shadow" />
@@ -179,7 +181,6 @@
 			{FIRE_STATE_TEXT[fireState]}</span
 		>
 	</button>
-	<input type="text" bind:value={sensitivityMultiplier} />
 </HTML>
 
 <style>
@@ -263,6 +264,12 @@
 		padding: 3px 2px;
 		box-shadow: 0 0 10px #aaa;
 		transform: rotate(180deg);
+	}
+
+	.sensitivityToggle {
+
+		width: 10px;
+		height: 250px;
 	}
 
 	.power .bar {
