@@ -12,7 +12,7 @@
 	const adjustSensitivtyMultiplier = () => {
 		const ua = navigator.userAgent;
 		if (/android/i.test(ua) && /Chrome/i.test(ua)){
-			sensitivityMultiplier =1;
+			sensitivityMultiplier = 2.5;
 		}
 		 else {
 			sensitivityMultiplier = 0.01;
@@ -169,10 +169,7 @@
 		draggable={true}
 	/>
 </T.Group>
-<HTML position={[-1.6, -1.3, 0]}>
-	
-	<input type="text" bind:value={sensitivityMultiplier} size="5"/>
-</HTML>
+
 <HTML position={[-1.6, -1.75, 0]}>
 	<button class="pushable" on:touchstart={powerCannon} on:touchend={fireCannon}>
 		<span class="shadow" />
